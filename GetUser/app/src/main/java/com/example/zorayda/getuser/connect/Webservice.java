@@ -13,13 +13,11 @@ import retrofit2.http.Part;
 
 public interface Webservice {
 
-    //@GET("get_users.php/")
-    @GET("5c106a932e00005a0655b4d1")
+    @GET("get_users.php/")
     Call<GetUsersResponse> getUsers();
 
-    //@POST("update_users.php/")
     @FormUrlEncoded
-    @POST("5c108dad2e00002a0955b537")
+    @POST("update_users.php/")
     Call<GeneralResponse> updateDataUser(
             @Field("id") String id,
             @Field("name") String name,

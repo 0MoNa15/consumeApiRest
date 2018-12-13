@@ -17,4 +17,8 @@
     <string name="actualizar_usuario">Actualizar usuario</string>
     <string name="intenta_mas_tarde">Intenta más tarde</string>
     <string name="obligatori">Obligatorio</string>
+    <string name="error_404">Error 404</string>
+    <string name="error_500">Error 500</string>
+    <string name="actualizado_correctamente">Actualizado correctamente</string>
+    <string name="actualizaci_n_incorrecta">Datos no actualizados</string>
 </resources>

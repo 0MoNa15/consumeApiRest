@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class GeneralResponse {
 
-    @SerializedName("mensaje")
+    @SerializedName("response")
     @Expose
-    public String message = "";
+    public boolean response;
 }

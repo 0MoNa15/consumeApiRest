@@ -110,17 +110,24 @@ public class UserRepository {
 
                     switch (response.code()) {
                         case 200:
-                            updateUserCallback.onSuccess(response.body().message);
+                            String messageResponse = "";
+
+                            if (response.body().response){
+                                messageResponse = mContext.getString(R.string.actualizado_correctamente);
+                            } else {
+                                messageResponse = mContext.getString(R.string.actualizaci_n_incorrecta);
+                            }
+                            updateUserCallback.onSuccess(messageResponse);
                             break;
                     }
                 } else {
                     switch (response.code()) {
                         case 404:
-                            updateUserCallback.onError(mContext.getString(R.string.error));
+                            updateUserCallback.onError(mContext.getString(R.string.error_404));
                             break;
 
                         case 500:
-                            updateUserCallback.onError(mContext.getString(R.string.error));
+                            updateUserCallback.onError(mContext.getString(R.string.error_500));
                             break;
 
                         default:
@@ -134,7 +141,7 @@ public class UserRepository {
             @Override
             public void onError(String message) {
                 super.onError(message);
-                updateUserCallback.onError(message);
+                updateUserCallback.onError(message + " onError");
             }
 
             @Override

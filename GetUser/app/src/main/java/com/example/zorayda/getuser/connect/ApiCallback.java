@@ -10,7 +10,7 @@ public class ApiCallback {
     }
 
     public interface UpdateUserCallback{
-        void onSuccess(String message);
+        void onSuccess(String statusResponse);
         void onError(String message);
     }
 }

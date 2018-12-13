@@ -6,7 +6,7 @@ import com.example.zorayda.getuser.mvpBase.BaseView;
 public interface UpdateUserContract {
     interface View extends BaseView<UpdateUserContract.Presenter> {
         void isLoading(boolean isLoading);
-        void displayResponse(String message, boolean isSuccess);
+        void displayResponse(String statusResponse, boolean isSuccess);
     }
 
     interface Presenter extends BasePresenter {

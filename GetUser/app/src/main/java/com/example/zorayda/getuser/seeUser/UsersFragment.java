@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.zorayda.getuser.findUser.FindUserResponse;
 import com.example.zorayda.getuser.seeUser.adapter.SeeUsersAdapter;
 import com.example.zorayda.getuser.seeUser.model.ListUser;
 import com.example.zorayda.getuser.MainActivity;
@@ -93,6 +94,17 @@ public class UsersFragment extends Fragment implements SeeUserContract.View{
             mUsers.clear();
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void displayResponseFindUser(FindUserResponse findUserResponse) {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.putExtra(VIEW_TYPE, VIEW_TYPE_UPDATE);
+        intent.putExtra(NAME, findUserResponse.response.get(0).name);
+        intent.putExtra(NUMBER, findUserResponse.response.get(0).number);
+        intent.putExtra(ID, findUserResponse.response.get(0).id);
+        intent.putExtra(URL_IMG, findUserResponse.response.get(0).avatar);
+        startActivity(intent);
     }
 
     @Override

@@ -3,8 +3,9 @@ package com.example.zorayda.getuser.connect;
 import android.content.Context;
 
 import com.example.zorayda.getuser.BuildConfig;
-import com.example.zorayda.getuser.seeUser.model.GetUsersResponse;
 import com.example.zorayda.getuser.R;
+import com.example.zorayda.getuser.findUser.FindUserResponse;
+import com.example.zorayda.getuser.seeUser.model.GetUsersResponse;
 import com.example.zorayda.getuser.updateUser.model.GeneralResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -112,7 +113,7 @@ public class UserRepository {
                         case 200:
                             String messageResponse = "";
 
-                            if (response.body().response){
+                            if (response.body().response) {
                                 messageResponse = mContext.getString(R.string.actualizado_correctamente);
                             } else {
                                 messageResponse = mContext.getString(R.string.actualizaci_n_incorrecta);
@@ -153,6 +154,58 @@ public class UserRepository {
 
                 } else {
                     updateUserCallback.onError(mContext.getString(R.string.error_servidor));
+                }
+            }
+        });
+    }
+
+
+    public void findUser(String username, final ApiCallback.findUserResponse findUserResponse) {
+        mWebservice.searchUserByName(username).enqueue(new CallbackCustom<FindUserResponse>(mContext) {
+            @Override
+            public void onResponse(Call<FindUserResponse> call, Response<FindUserResponse> response) {
+                super.onResponse(call, response);
+                if (response.isSuccessful()) {
+
+                    switch (response.code()) {
+                        case 200:
+                            findUserResponse.onSuccess(response.body());
+                            break;
+                    }
+                } else {
+                    switch (response.code()) {
+                        case 404:
+                            findUserResponse.onError(mContext.getString(R.string.error_404));
+                            break;
+
+                        case 500:
+                            findUserResponse.onError(mContext.getString(R.string.error_500));
+                            break;
+
+                        default:
+                            findUserResponse.onError(mContext.getString(R.string.error));
+                            break;
+
+                    }
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+                super.onError(message);
+                findUserResponse.onError(message);
+
+            }
+
+            @Override
+            public void onFailure(Call<FindUserResponse> call, Throwable t) {
+                super.onFailure(call, t);
+
+                if (t instanceof IOException) {
+                    findUserResponse.onError(mContext.getString(R.string.error_internet));
+
+                } else {
+                    findUserResponse.onError(mContext.getString(R.string.error_servidor));
                 }
             }
         });

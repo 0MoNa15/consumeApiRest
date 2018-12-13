@@ -1,5 +1,6 @@
 package com.example.zorayda.getuser.connect;
 
+import com.example.zorayda.getuser.findUser.FindUserResponse;
 import com.example.zorayda.getuser.seeUser.model.GetUsersResponse;
 import com.example.zorayda.getuser.updateUser.model.GeneralResponse;
 
@@ -22,4 +23,8 @@ public interface Webservice {
             @Field("id") String id,
             @Field("name") String name,
             @Field("number") String number);
+
+    @GET("get_users.php/")
+    Call<FindUserResponse> searchUserByName(
+            @Field("username") String name);
 }

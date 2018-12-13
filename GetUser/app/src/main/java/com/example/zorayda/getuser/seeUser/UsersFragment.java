@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -16,6 +18,7 @@ import com.example.zorayda.getuser.seeUser.adapter.SeeUsersAdapter;
 import com.example.zorayda.getuser.seeUser.model.ListUser;
 import com.example.zorayda.getuser.MainActivity;
 import com.example.zorayda.getuser.R;
+import com.example.zorayda.getuser.updateUser.UpdateUserFragment;
 
 import java.util.ArrayList;
 
@@ -38,6 +41,10 @@ public class UsersFragment extends Fragment implements SeeUserContract.View{
 
     //@BindView(R.id.recyclerViewLisUsers)
     RecyclerView mListUsersRecyclerView;
+    Button mSearchUserButton;
+    EditText mUsernameEditText;
+
+    String mUsername;
 
     public UsersFragment() { }
 
@@ -52,6 +59,8 @@ public class UsersFragment extends Fragment implements SeeUserContract.View{
         View view = inflater.inflate(R.layout.fragment_users, container, false);
         ButterKnife.bind(this, view);
         mListUsersRecyclerView = view.findViewById(R.id.recyclerViewLisUsers);
+        mSearchUserButton = view.findViewById(R.id.buttonSearch);
+        mUsernameEditText = view.findViewById(R.id.editTextUsername);
         initializeWidget();
         return view;
     }
@@ -125,7 +134,6 @@ public class UsersFragment extends Fragment implements SeeUserContract.View{
         mAdapter = new SeeUsersAdapter(getContext(), mUsers);
         mListUsersRecyclerView.setAdapter(mAdapter);
 
-
         mMaterialDialog = new MaterialDialog.Builder(getActivity())
                 .title(R.string.cargando)
                 .progress(true, 0)
@@ -144,6 +152,18 @@ public class UsersFragment extends Fragment implements SeeUserContract.View{
                 intent.putExtra(ID, mUsers.get(position).usuario.id);
                 intent.putExtra(URL_IMG, mUsers.get(position).usuario.avatar);
                 startActivity(intent);
+            }
+        });
+
+        mSearchUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mUsername = mUsernameEditText.getText().toString();
+                if (UpdateUserFragment.validateText(mUsername)){
+                    mPresenter.searchUserFindUser(mUsername);
+                } else {
+                    mUsernameEditText.setError(getString(R.string.obligatori));
+                }
             }
         });
     }

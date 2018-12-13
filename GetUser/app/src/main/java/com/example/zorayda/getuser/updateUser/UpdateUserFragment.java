@@ -143,7 +143,7 @@ public class UpdateUserFragment extends Fragment implements UpdateUserContract.V
         mPresenter = presenter;
     }
 
-    public boolean validateText(String text){
+    public static boolean validateText(String text){
         if (text == null){
             return false;
         } else if (text.isEmpty()){

@@ -11,6 +11,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface Webservice {
 
@@ -24,7 +25,8 @@ public interface Webservice {
             @Field("name") String name,
             @Field("number") String number);
 
-    @GET("get_users.php/")
+    //@GET("find_users.php/")
+    @GET("5c11f781330000350c998c6b")
     Call<FindUserResponse> searchUserByName(
-            @Field("username") String name);
+            @Query("username") String name);
 }

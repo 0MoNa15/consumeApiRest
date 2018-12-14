@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +13,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.zorayda.getuser.MainActivity;
+import com.example.zorayda.getuser.R;
 import com.example.zorayda.getuser.findUser.FindUserResponse;
 import com.example.zorayda.getuser.seeUser.adapter.SeeUsersAdapter;
 import com.example.zorayda.getuser.seeUser.model.ListUser;
-import com.example.zorayda.getuser.MainActivity;
-import com.example.zorayda.getuser.R;
 import com.example.zorayda.getuser.updateUser.UpdateUserFragment;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
-import butterknife.ButterKnife;
 
 import static com.example.zorayda.getuser.MainActivity.ID;
 import static com.example.zorayda.getuser.MainActivity.NAME;
@@ -41,7 +37,6 @@ public class UsersFragment extends Fragment implements SeeUserContract.View{
 
     ArrayList<ListUser> mUsers = new ArrayList<>();
 
-    //@BindView(R.id.recyclerViewLisUsers)
     RecyclerView mListUsersRecyclerView;
     Button mSearchUserButton;
     EditText mUsernameEditText;
@@ -59,7 +54,6 @@ public class UsersFragment extends Fragment implements SeeUserContract.View{
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_users, container, false);
-        ButterKnife.bind(this, view);
         mListUsersRecyclerView = view.findViewById(R.id.recyclerViewLisUsers);
         mSearchUserButton = view.findViewById(R.id.buttonSearch);
         mUsernameEditText = view.findViewById(R.id.editTextUsername);
@@ -109,7 +103,6 @@ public class UsersFragment extends Fragment implements SeeUserContract.View{
 
     @Override
     public void displayResponseFindUser(FindUserResponse findUserResponse) {
-        Log.e("Debug", "displayResponseFindUser: " + findUserResponse.toString());
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.putExtra(VIEW_TYPE, VIEW_TYPE_UPDATE);
         intent.putExtra(NAME, findUserResponse.response.get(0).userResponse.name);
@@ -164,30 +157,6 @@ public class UsersFragment extends Fragment implements SeeUserContract.View{
                 mUsername = mUsernameEditText.getText().toString();
                 if (UpdateUserFragment.validateText(mUsername)){
                     mPresenter.searchUserFindUser(mUsername);
-                    /*Iterator<ListUser> it = mUsers.iterator();
-                    ListUser item = it.next();
-                    boolean find = false;
-                    while(it.hasNext()){
-                        item=it.next();
-                        if (mUsername.equalsIgnoreCase(item.usuario.name)){
-                            find = true;
-                            break;
-                        }
-                    }
-                    
-                    if (find){
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        intent.putExtra(VIEW_TYPE, VIEW_TYPE_UPDATE);
-                        intent.putExtra(NAME, item.usuario.name);
-                        intent.putExtra(NUMBER, item.usuario.number);
-                        intent.putExtra(ID, item.usuario.id);
-                        intent.putExtra(URL_IMG, item.usuario.avatar);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(getActivity(), R.string.no_se_ha_encontrado_este_nombre, Toast.LENGTH_SHORT).show();
-                    }*/
-                        
-
                 } else {
                     mUsernameEditText.setError(getString(R.string.obligatori));
                 }

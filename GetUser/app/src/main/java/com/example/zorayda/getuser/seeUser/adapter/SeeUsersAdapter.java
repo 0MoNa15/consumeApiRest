@@ -10,14 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.zorayda.getuser.seeUser.model.ListUser;
 import com.example.zorayda.getuser.R;
+import com.example.zorayda.getuser.seeUser.model.ListUser;
 import com.example.zorayda.getuser.seeUser.model.UserResponse;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class SeeUsersAdapter extends RecyclerView.Adapter<SeeUsersAdapter.ViewHolderSeeUsersAdapter> implements View.OnClickListener {
 
@@ -77,7 +76,6 @@ public class SeeUsersAdapter extends RecyclerView.Adapter<SeeUsersAdapter.ViewHo
 
         ViewHolderSeeUsersAdapter(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
             mNumberTextView = itemView.findViewById(R.id.textViewNumber);
             mIdTextView = itemView.findViewById(R.id.textViewId);
             mNameTextView = itemView.findViewById(R.id.textViewName);

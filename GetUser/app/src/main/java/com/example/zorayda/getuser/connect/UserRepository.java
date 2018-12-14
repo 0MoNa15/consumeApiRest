@@ -1,11 +1,13 @@
 package com.example.zorayda.getuser.connect;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.zorayda.getuser.BuildConfig;
 import com.example.zorayda.getuser.R;
 import com.example.zorayda.getuser.findUser.FindUserResponse;
 import com.example.zorayda.getuser.seeUser.model.GetUsersResponse;
+import com.example.zorayda.getuser.seeUser.model.UserResponse;
 import com.example.zorayda.getuser.updateUser.model.GeneralResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -103,6 +105,7 @@ public class UserRepository {
     }
 
     public void updateDataUserApi(String id, String name, String number, final ApiCallback.UpdateUserCallback updateUserCallback) {
+
         mWebservice.updateDataUser(id, name, number).enqueue(new CallbackCustom<GeneralResponse>(mContext) {
             @Override
             public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
@@ -169,6 +172,7 @@ public class UserRepository {
 
                     switch (response.code()) {
                         case 200:
+                            Log.e("Debug", "onResponse: " + response.body());
                             findUserResponse.onSuccess(response.body());
                             break;
                     }

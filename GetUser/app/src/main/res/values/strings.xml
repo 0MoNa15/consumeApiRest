@@ -22,4 +22,5 @@
     <string name="actualizado_correctamente">Actualizado correctamente</string>
     <string name="actualizaci_n_incorrecta">Datos no actualizados</string>
     <string name="buscar">Buscar</string>
+    <string name="no_se_ha_encontrado_este_nombre">No se ha encontrado este nombre</string>
 </resources>

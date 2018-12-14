@@ -16,6 +16,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.example.zorayda.getuser.MainActivity;
 import com.example.zorayda.getuser.R;
+import com.example.zorayda.getuser.seeUser.model.UserResponse;
 
 import static com.example.zorayda.getuser.MainActivity.ID;
 import static com.example.zorayda.getuser.MainActivity.NAME;
@@ -106,6 +107,10 @@ public class UpdateUserFragment extends Fragment implements UpdateUserContract.V
                 } else if (!validateText(mId)) {
                     Toast.makeText(getActivity(), R.string.intenta_mas_tarde, Toast.LENGTH_SHORT).show();
                 } else {
+                    UserResponse userResponse = new UserResponse();
+                    userResponse.id = mId;
+                    userResponse.name = mNameEditText.getText().toString();
+                    userResponse.number = mNumberEditText.getText().toString();
                     mPresenter.sendDataUserUpdate(mId, mNameEditText.getText().toString(), mNumberEditText.getText().toString());
                 }
             }

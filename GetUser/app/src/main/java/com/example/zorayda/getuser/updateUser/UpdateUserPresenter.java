@@ -1,9 +1,11 @@
 package com.example.zorayda.getuser.updateUser;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.zorayda.getuser.connect.ApiCallback;
 import com.example.zorayda.getuser.connect.UserRepository;
+import com.example.zorayda.getuser.seeUser.model.UserResponse;
 
 import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
@@ -19,6 +21,7 @@ public class UpdateUserPresenter implements UpdateUserContract.Presenter{
 
     @Override
     public void sendDataUserUpdate(String id, String name, String number) {
+
         mView.isLoading(true);
         mUserRepository.updateDataUserApi(id, name, number, new ApiCallback.UpdateUserCallback() {
             @Override

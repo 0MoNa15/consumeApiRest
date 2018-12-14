@@ -2,10 +2,12 @@ package com.example.zorayda.getuser.connect;
 
 import com.example.zorayda.getuser.findUser.FindUserResponse;
 import com.example.zorayda.getuser.seeUser.model.GetUsersResponse;
+import com.example.zorayda.getuser.seeUser.model.UserResponse;
 import com.example.zorayda.getuser.updateUser.model.GeneralResponse;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -25,8 +27,7 @@ public interface Webservice {
             @Field("name") String name,
             @Field("number") String number);
 
-    //@GET("find_users.php/")
-    @GET("5c11f781330000350c998c6b")
+    @GET("find_users.php/")
     Call<FindUserResponse> searchUserByName(
             @Query("username") String name);
 }

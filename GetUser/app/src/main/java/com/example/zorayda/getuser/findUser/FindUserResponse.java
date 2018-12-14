@@ -9,5 +9,12 @@ import java.util.ArrayList;
 public class FindUserResponse {
     @SerializedName("response")
     @Expose
-    public ArrayList<UserResponse> response = null;
+    public ArrayList<Response> response = null;
+
+    @Override
+    public String toString() {
+        return "FindUserResponse{" +
+                "response=" + response +
+                '}';
+    }
 }

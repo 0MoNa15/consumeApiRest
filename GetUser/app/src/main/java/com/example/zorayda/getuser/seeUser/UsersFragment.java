@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.example.zorayda.getuser.R;
 import com.example.zorayda.getuser.updateUser.UpdateUserFragment;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import butterknife.ButterKnife;
 
@@ -107,12 +109,13 @@ public class UsersFragment extends Fragment implements SeeUserContract.View{
 
     @Override
     public void displayResponseFindUser(FindUserResponse findUserResponse) {
+        Log.e("Debug", "displayResponseFindUser: " + findUserResponse.toString());
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.putExtra(VIEW_TYPE, VIEW_TYPE_UPDATE);
-        intent.putExtra(NAME, findUserResponse.response.get(0).name);
-        intent.putExtra(NUMBER, findUserResponse.response.get(0).number);
-        intent.putExtra(ID, findUserResponse.response.get(0).id);
-        intent.putExtra(URL_IMG, findUserResponse.response.get(0).avatar);
+        intent.putExtra(NAME, findUserResponse.response.get(0).userResponse.name);
+        intent.putExtra(NUMBER, findUserResponse.response.get(0).userResponse.number);
+        intent.putExtra(ID, findUserResponse.response.get(0).userResponse.id);
+        intent.putExtra(URL_IMG, findUserResponse.response.get(0).userResponse.avatar);
         startActivity(intent);
     }
 
@@ -161,6 +164,30 @@ public class UsersFragment extends Fragment implements SeeUserContract.View{
                 mUsername = mUsernameEditText.getText().toString();
                 if (UpdateUserFragment.validateText(mUsername)){
                     mPresenter.searchUserFindUser(mUsername);
+                    /*Iterator<ListUser> it = mUsers.iterator();
+                    ListUser item = it.next();
+                    boolean find = false;
+                    while(it.hasNext()){
+                        item=it.next();
+                        if (mUsername.equalsIgnoreCase(item.usuario.name)){
+                            find = true;
+                            break;
+                        }
+                    }
+                    
+                    if (find){
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        intent.putExtra(VIEW_TYPE, VIEW_TYPE_UPDATE);
+                        intent.putExtra(NAME, item.usuario.name);
+                        intent.putExtra(NUMBER, item.usuario.number);
+                        intent.putExtra(ID, item.usuario.id);
+                        intent.putExtra(URL_IMG, item.usuario.avatar);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), R.string.no_se_ha_encontrado_este_nombre, Toast.LENGTH_SHORT).show();
+                    }*/
+                        
+
                 } else {
                     mUsernameEditText.setError(getString(R.string.obligatori));
                 }
